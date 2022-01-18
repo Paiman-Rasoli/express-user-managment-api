@@ -19,6 +19,7 @@ async function loginHandler(e) {
       password: password,
     }),
   });
-  console.log("rr ", req.status);
+  const res = await req.json();
+  console.log("Result", res);
 }
 btn.addEventListener("submit", loginHandler);
