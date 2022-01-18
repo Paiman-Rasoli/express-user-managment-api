@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { users } from "../data/users";
 const bcrypt = require("bcryptjs");
-
+import { Jwt } from "../utils/jwt";
 export class ApiController {
   req: Request;
   res: Response;
@@ -15,7 +15,22 @@ export class ApiController {
     if (res.length > 0) {
       // check plain password with hashed password
       if (bcrypt.compareSync(password, res[0].password)) {
-        return this.res.status(200).json({ email: email, pass: password });
+        // delete password not to send in response
+        res[0].password = "";
+        const token: string = new Jwt(
+          res[0].id,
+          res[0].firstname,
+          res[0].lastname
+        ).createToken();
+        return this.res
+          .cookie("acess_token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production" ? true : false,
+            maxAge: 168 * 60 * 60 * 1000,
+            // sameSite: "None",
+          })
+          .status(200)
+          .json({ payload: res[0] });
       }
       return this.res.status(400).json({ msg: "Invalid credentials!" });
     }

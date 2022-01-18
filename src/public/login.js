@@ -20,6 +20,9 @@ async function loginHandler(e) {
     }),
   });
   const res = await req.json();
-  console.log("Result", res);
+  if (req.status === 200) {
+    localStorage.setItem("user_test", JSON.stringify(res.payload));
+    window.location = "/dashboard ";
+  }
 }
 btn.addEventListener("submit", loginHandler);
