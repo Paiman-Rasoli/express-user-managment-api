@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 // view engines
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/", require("./routes/main"));
 // Run the app and you will see the cb.
 app.listen(PORT, (): void => {

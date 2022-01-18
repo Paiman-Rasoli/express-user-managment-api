@@ -17,7 +17,7 @@
       class="form-container d-flex justify-content-center flex-column align-items-center"
     >
       <div><h4>Welcome to user managment</h4></div>
-      <form method="post">
+      <form method="post" id="form-login">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
@@ -25,7 +25,8 @@
           <input
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
+            name="email"
+            id="emailInput"
             aria-describedby="emailHelp"
           />
           <div id="emailHelp" class="form-text">
@@ -37,7 +38,8 @@
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            name="password"
+            id="passwordInput"
           />
         </div>
         <div class="mb-3 form-check">
@@ -49,5 +51,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
+    <script src="/login.js"></script>
   </body>
 </html>
